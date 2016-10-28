@@ -46,6 +46,7 @@ public void keyPressed()
   {
     koiShip.setX((int)(Math.random()*501));
     koiShip.setY((int)(Math.random()*501));
+    koiShip.setPointDirection((int)(Math.random()*361));
   }
   else if(key == 'a')
   {
