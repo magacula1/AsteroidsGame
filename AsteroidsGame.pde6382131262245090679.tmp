@@ -82,7 +82,7 @@ public class Star
   public void show()
   {
     noStroke();
-    fill(170, 174, 170);
+    fill(230, 237, 230);
     ellipse(posX, posY, mySize, mySize);
   }
 }
@@ -139,13 +139,12 @@ public class Asteroid extends Floater
     yCorners[4] = 8;
     xCorners[5] = -14;
     yCorners[5] = 0;
-    myColor = 100;
+    myColor = 200;
     myCenterX = ((int)(Math.random()*501));
     myCenterY = ((int)(Math.random()*501));
     myDirectionX = (Math.random()*4);
     myDirectionY = (Math.random()*4);
     myPointDirection = ((int)(Math.random()*361));
-    rotSpeed = ((int)(Math.random()*8));
     
   }
   
