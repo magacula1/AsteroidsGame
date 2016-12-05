@@ -2,6 +2,7 @@ SpaceShip koiShip;
 Star [] stars;
 //Asteroid [] asteroids;
 ArrayList <Asteroid> theList;
+ArrayList <Bullet> bullets;
 
 public void setup() 
 {
@@ -21,11 +22,15 @@ public void setup()
    asteroids[i] = new Asteroid();
    } */
 
+
   theList = new ArrayList <Asteroid> ();
-  for (int i = 0; i < 20; i++ )
+  for (int i = 0; i < 20; i++)
   {
     theList.add(new Asteroid());
   }
+  
+  bullets = new ArrayList <Bullet> ();
+  
 }
 
 public void draw() 
@@ -35,8 +40,7 @@ public void draw()
   {
     stars[i].show();
   }
-  koiShip.show();
-  koiShip.move();
+
   /*for (int i = 0; i < 25; i++)
    {
    asteroids[i].show();
@@ -44,19 +48,40 @@ public void draw()
    } */
 
   for (int i= 0; i< theList.size(); i++)
-  {
-    theList.get(i).move();
-    theList.get(i).show();
-
-    if ((dist(koiShip.getX(), koiShip.getY(), theList.get(i).getX(), theList.get(i).getY()) < 20))
+      {
+        theList.get(i).move();
+        theList.get(i).show();
+      }
+  for(int i = 0; i < bullets.size(); i++)
+      {
+        bullets.get(i).move();
+        bullets.get(i).show();
+      }
+  for(int j = 0; j < bullets.size(); j++)
     {
-      theList.remove(i);
+      for(int i = 0; i < theList.size(); i++)
+          {
+          /*if (dist(koiShip.getX(), koiShip.getY(), theList.get(i).getX(), theList.get(i).getY()) < 20)
+            {
+              theList.remove(i);
+            }
+            */
+            if (dist(bullets.get(j).getX(), bullets.get(j).getY(), theList.get(i).getX(), theList.get(i).getY()) < 20)
+              {
+                theList.remove(i);
+              }
+          }
     }
-  }
+  koiShip.show();
+  koiShip.move();
 }
 
 public void keyPressed()
 {
+  if(key == ' ')
+  { 
+    bullets.add(new Bullet(koiShip));
+  }   
   if (keyCode == UP)
   {
     koiShip.accelerate(0.08);
@@ -69,12 +94,12 @@ public void keyPressed()
   } else if (keyCode == RIGHT)
   {
     koiShip.rotate(25);
-  } else if (key == ' ')
+  } else if (key == 'a')
   {
     koiShip.setX((int)(Math.random()*501));
     koiShip.setY((int)(Math.random()*501));
     koiShip.setPointDirection((int)(Math.random()*361));
-  } else if (key == 'a')
+  } else if (key == 'z')
   {
     koiShip.setDirectionX(0);
     koiShip.setDirectionY(0);
